@@ -1,0 +1,14 @@
+# Netlify deployment for Anna Zieniute website
+[build]
+  command = "npm run build"
+  publish = "out"
+
+[build.environment]
+  NETLIFY_STATIC = "true"
+  NEXT_PUBLIC_BASE_PATH = ""
+  NEXT_PUBLIC_SITE_URL = "https://anna-zieniute-site.netlify.app"
+
+[[redirects]]
+  from = "/"
+  to = "/lt"
+  status = 302
