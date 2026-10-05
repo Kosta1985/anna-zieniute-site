@@ -1,20 +1,24 @@
 import type { NextConfig } from "next";
 
 const isGitHubPages = process.env.GITHUB_PAGES === "true";
+const isNetlifyStatic = process.env.NETLIFY_STATIC === "true";
+const isStaticExport = isGitHubPages || isNetlifyStatic;
 
 const nextConfig: NextConfig = {
-  ...(isGitHubPages ? {
+  ...(isStaticExport ? {
     output: "export" as const,
+  } : {}),
+  ...(isGitHubPages ? {
     basePath: "/anna-zieniute-site",
     assetPrefix: "/anna-zieniute-site",
   } : {}),
   images: {
     formats: ["image/avif", "image/webp"],
-    unoptimized: isGitHubPages,
+    unoptimized: isStaticExport,
   },
   poweredByHeader: false,
   async redirects() {
-    if (isGitHubPages) return [];
+    if (isStaticExport) return [];
     return [{ source: "/", destination: "/lt", permanent: false }];
   },
 };
