@@ -16,6 +16,7 @@ export type PageKey =
 export type Localized<T> = Record<Locale, T>;
 
 export const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://annazieniute.com";
+export const asset = (path: string) => `${process.env.NEXT_PUBLIC_BASE_PATH || ""}${path}`;
 
 export const paths: Record<PageKey, Localized<string>> = {
   home: { lt: "", en: "" },

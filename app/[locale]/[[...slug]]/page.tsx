@@ -24,7 +24,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       canonical: current,
       languages: { lt: `${siteUrl}${href("lt", page)}`, en: `${siteUrl}${href("en", page)}`, "x-default": `${siteUrl}${href("lt", page)}` },
     },
-    openGraph: { title: data.title, description: data.description, url: current, siteName: "Anna Zieniute", locale: locale === "lt" ? "lt_LT" : "en_GB", type: "website", images: [{ url: "/images/anna-outdoors.webp", width: 1280, height: 853, alt: "Anna Zieniute" }] },
+    openGraph: { title: data.title, description: data.description, url: current, siteName: "Anna Zieniute", locale: locale === "lt" ? "lt_LT" : "en_GB", type: "website", images: [{ url: `${siteUrl}/images/anna-outdoors.webp`, width: 1280, height: 853, alt: "Anna Zieniute" }] },
   };
 }
 

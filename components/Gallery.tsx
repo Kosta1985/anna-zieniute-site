@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import type { Locale } from "@/content/site";
+import { asset, type Locale } from "@/content/site";
 
 const images = [
   { src: "/images/anna-editorial-wide.webp", alt: "Anna Zieniute editorial portrait" },
@@ -25,14 +25,14 @@ export function Gallery({ locale }: { locale: Locale }) {
       <div className="gallery-grid">
         {images.map((image, index) => (
           <button key={image.src} className={`gallery-item item-${index + 1}`} onClick={() => setSelected(index)} aria-label={`${locale === "lt" ? "Atverti nuotrauką" : "Open image"} ${index + 1}`}>
-            <Image src={image.src} alt={image.alt} fill sizes="(max-width: 700px) 100vw, 50vw" />
+            <Image src={asset(image.src)} alt={image.alt} fill sizes="(max-width: 700px) 100vw, 50vw" />
           </button>
         ))}
       </div>
       {selected !== null && (
         <div className="lightbox" role="dialog" aria-modal="true" aria-label={locale === "lt" ? "Nuotraukų peržiūra" : "Image viewer"} onClick={() => setSelected(null)}>
           <button aria-label={locale === "lt" ? "Uždaryti" : "Close"}>×</button>
-          <Image src={images[selected].src} alt={images[selected].alt} fill sizes="100vw" />
+          <Image src={asset(images[selected].src)} alt={images[selected].alt} fill sizes="100vw" />
         </div>
       )}
     </>

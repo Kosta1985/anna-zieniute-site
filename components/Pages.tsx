@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Accordion } from "./Accordion";
 import { ContactForm } from "./ContactForm";
 import { Gallery } from "./Gallery";
-import { articles, faqs, href, speakingTopics, topics, ui, videos, type Locale, type PageKey } from "@/content/site";
+import { articles, asset, faqs, href, speakingTopics, topics, ui, videos, type Locale, type PageKey } from "@/content/site";
 
 function ArrowLink({ href: to, children, light = false }: { href: string; children: React.ReactNode; light?: boolean }) {
   return <Link className={`text-link${light ? " light" : ""}`} href={to}>{children}<span aria-hidden="true">↗</span></Link>;
@@ -18,7 +18,7 @@ function PageHero({ eyebrow, title, intro, image = "/images/anna-editorial.webp"
         {intro && <p className="lead">{intro}</p>}
       </div>
       <div className="page-hero-image reveal delay-1">
-        <Image src={image} alt={imageAlt} fill priority sizes="(max-width: 800px) 100vw, 46vw" />
+        <Image src={asset(image)} alt={imageAlt} fill priority sizes="(max-width: 800px) 100vw, 46vw" />
       </div>
     </section>
   );
@@ -29,7 +29,7 @@ export function HomePage({ locale }: { locale: Locale }) {
   return (
     <>
       <section className="home-hero">
-        <Image className="hero-image" src="/images/anna-outdoors.webp" alt="Anna Zieniute" fill priority sizes="100vw" />
+        <Image className="hero-image" src={asset("/images/anna-outdoors.webp")} alt="Anna Zieniute" fill priority sizes="100vw" />
         <div className="hero-shade" />
         <div className="hero-copy reveal">
           <p className="hero-brand">Anna Zieniute</p>
@@ -51,7 +51,7 @@ export function HomePage({ locale }: { locale: Locale }) {
       </section>
 
       <section className="split-feature section-pad">
-        <div className="portrait-frame"><Image src="/images/anna-portrait.webp" alt="Anna Zieniute" fill sizes="(max-width: 800px) 100vw, 45vw" /></div>
+        <div className="portrait-frame"><Image src={asset("/images/anna-portrait.webp")} alt="Anna Zieniute" fill sizes="(max-width: 800px) 100vw, 45vw" /></div>
         <div className="split-copy">
           <p className="eyebrow">{lt ? "Individualiai" : "Individual"}</p>
           <h2>{lt ? "Erdvė išgirsti save aiškiau." : "A space to hear yourself more clearly."}</h2>
@@ -124,7 +124,7 @@ export function SpeakingPage({ locale }: { locale: Locale }) {
   return <>
     <PageHero eyebrow={lt ? "Paskaitos" : "Speaking"} title={lt ? "Paskaitos, seminarai ir renginiai" : "Talks, Seminars & Events"} intro={lt ? "Gyvas, suprantamas ir mintį tęsti kviečiantis turinys organizacijoms, bendruomenėms ir renginių auditorijoms." : "Clear, engaging ideas that invite continued reflection for organisations, communities and event audiences."} image="/images/anna-outdoors.webp" />
     <section className="talk-topics section-pad"><div className="section-heading"><p className="eyebrow">{lt ? "Galimos temos" : "Suggested themes"}</p><h2>{lt ? "Pokalbiai apie tai, kas vyksta mūsų viduje." : "Conversations about what unfolds within us."}</h2></div><div>{speakingTopics[locale].map((topic, index) => <p key={topic}><span>{String(index + 1).padStart(2, "0")}</span>{topic}</p>)}</div></section>
-    <section className="speaking-philosophy"><div className="speaking-photo"><Image src="/images/anna-editorial.webp" alt="Anna Zieniute" fill sizes="(max-width: 800px) 100vw, 50vw" /></div><div><p className="eyebrow light">{lt ? "Kiekvienai auditorijai" : "For every audience"}</p><h2>{lt ? "Tema gali būti pritaikyta renginio tikslui, formatui ir žmonėms salėje." : "Each theme can be shaped around the event, its format and the people in the room."}</h2><p>{lt ? "Užklausoje papasakokite apie auditoriją ir norimą pokalbį. Turinys bei praktiniai klausimai derinami individualiai." : "Tell us about the audience and the conversation you hope to create. Content and practical details are agreed individually."}</p></div></section>
+    <section className="speaking-philosophy"><div className="speaking-photo"><Image src={asset("/images/anna-editorial.webp")} alt="Anna Zieniute" fill sizes="(max-width: 800px) 100vw, 50vw" /></div><div><p className="eyebrow light">{lt ? "Kiekvienai auditorijai" : "For every audience"}</p><h2>{lt ? "Tema gali būti pritaikyta renginio tikslui, formatui ir žmonėms salėje." : "Each theme can be shaped around the event, its format and the people in the room."}</h2><p>{lt ? "Užklausoje papasakokite apie auditoriją ir norimą pokalbį. Turinys bei praktiniai klausimai derinami individualiai." : "Tell us about the audience and the conversation you hope to create. Content and practical details are agreed individually."}</p></div></section>
     <section className="form-section section-pad"><div className="section-heading"><p className="eyebrow">{lt ? "Renginio užklausa" : "Speaking enquiry"}</p><h2>{ui.invite[locale]}</h2></div><ContactForm locale={locale} kind="speaking" /></section>
   </>;
 }
