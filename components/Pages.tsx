@@ -113,9 +113,41 @@ export function IndividualPage({ locale }: { locale: Locale }) {
   const steps = lt ? [["Sustoti", "Sukurti erdvės tam, kas šiuo metu svarbiausia."], ["Pastebėti", "Atpažinti pasikartojančias reakcijas, įsitikinimus ir modelius."], ["Išsigryninti", "Aiškiau pamatyti kryptį ir sąmoningai pasirinkti kitą žingsnį."]] : [["Pause", "Create space for what matters most right now."], ["Notice", "Recognise recurring reactions, beliefs and patterns."], ["Clarify", "See your direction more clearly and choose the next step consciously."]];
   return <>
     <PageHero eyebrow={lt ? "Individualiai" : "Individual"} title={lt ? "Individualus pokalbis" : "Individual Conversation"} intro={lt ? "Ramus, struktūruotas laikas pažvelgti į situaciją iš arčiau ir išgirsti save be skubėjimo." : "Calm, structured time to look more closely at a situation and hear yourself without rushing."} image="/images/anna-portrait.webp" />
+    <section className="price-strip section-pad">
+      <div><p className="eyebrow">{lt ? "Individualus pokalbis" : "Individual session"}</p><h2>{lt ? "50 € / 60 min." : "€50 / 60 min."}</h2></div>
+      <div>
+        <p>{lt ? "Privatus nuotolinis pokalbis vienas su vienu." : "Private one-to-one online session."}</p>
+        <Link className="button" href="#book-session">{lt ? "Registruotis" : "Book a session"}</Link>
+      </div>
+    </section>
     <section className="process section-pad">{steps.map(([title, text], i) => <article key={title}><span>0{i + 1}</span><h2>{title}</h2><p>{text}</p></article>)}</section>
-    <section className="service-note section-pad"><div><p className="eyebrow">{lt ? "Svarbu žinoti" : "Good to know"}</p><h2>{lt ? "Pokalbis nėra psichoterapija ar sveikatos priežiūros paslauga." : "A conversation is not psychotherapy or a healthcare service."}</h2></div><p>{lt ? "Tai mentorystės ir refleksijos erdvė. Čia neteikiama diagnostika, gydymas ar garantuojami sveikatos rezultatai. Jei jums reikalinga psichologinė ar medicininė pagalba, kreipkitės į atitinkamos srities licencijuotą specialistą." : "It is a space for mentoring and reflection. It does not provide diagnosis or treatment, and no health outcomes are promised. If you need psychological or medical support, please contact an appropriately licensed professional."}</p></section>
-    <section className="form-section section-pad"><div className="section-heading"><p className="eyebrow">{lt ? "Susisiekite" : "Get in touch"}</p><h2>{lt ? "Pirmas žingsnis gali būti paprastas pokalbis." : "The first step can be a simple conversation."}</h2></div><ContactForm locale={locale} /></section>
+    <section className="change-focus section-pad">
+      <p className="eyebrow">{lt ? "Pokyčiai" : "Change"}</p>
+      <h2>{lt ? "Pokyčiai yra nuolatinė gyvenimo dalis. Gebėjimą prie jų prisitaikyti galima lavinti." : "Change is a constant part of life. The ability to adapt can be developed."}</h2>
+      <p>{lt ? "Individualus darbas padeda pastebėti pasipriešinimą, naujumo baimę ir automatines reakcijas, kad naujos aplinkybės taptų lengviau valdomos." : "Individual work helps you notice resistance, fear of the unfamiliar and automatic reactions so new circumstances become easier to navigate."}</p>
+    </section>
+    <section className="practical-section section-pad">
+      <div><p className="eyebrow">{lt ? "Praktiniai pratimai" : "Practical exercises"}</p><h2>{lt ? "Ne tik suprasti, bet ir pritaikyti." : "Move from insight into action."}</h2></div>
+      <div className="bullet-stack">
+        {(lt ? [
+          "Padeda greičiau prisitaikyti prie naujų idėjų ir aplinkybių.",
+          "Padeda pastebėti automatines reakcijas ir įprastus mąstymo modelius.",
+          "Padeda lengviau toleruoti pokyčius ir neapibrėžtumą.",
+          "Padeda perkelti naujas idėjas iš supratimo į realius veiksmus.",
+        ] : [
+          "Support faster adaptation to new ideas and circumstances.",
+          "Help you notice automatic reactions and familiar thinking patterns.",
+          "Make change and uncertainty easier to tolerate.",
+          "Help turn new ideas from understanding into real action.",
+        ]).map((item) => <p key={item}>{item}</p>)}
+      </div>
+    </section>
+    <section className="audience-grid section-pad">
+      <article><p className="eyebrow">{lt ? "Kam tinka" : "Who it is for"}</p><h2>{lt ? "Suaugusiesiems, kurie nori veikti sąmoningiau." : "For adults who want to respond more consciously."}</h2><p>{lt ? "Verslo savininkams, verslininkams, žmonėms nuolatinių pokyčių aplinkoje, tiems, kuriems sunku prisitaikyti prie neapibrėžtumo, norintiems geriau suprasti save, spręsti konkretų klausimą ar pasikartojančią situaciją, ir žmonėms, keičiantiems darbą, verslą, šalį, santykius ar kitą gyvenimo etapą." : "For business owners, entrepreneurs, people living and working through constant change, anyone struggling with uncertainty, people who want to understand themselves better, work through a specific question or recurring situation, and those moving through a change of job, business, country, relationship or life stage."}</p></article>
+      <article><p className="eyebrow">{lt ? "Kam netinka" : "Who it is not for"}</p><h2>{lt ? "Tik suaugusiesiems ir tik aktyviai dalyvaujantiems." : "Adults only, and only for people willing to participate actively."}</h2><p>{lt ? "Pokalbiai neskirti vaikams ar paaugliams. Jie taip pat netinka žmonėms, kurie nėra suinteresuoti gerinti savo gyvenimo ir neketina praktiškai taikyti aptartų įrankių." : "Sessions are not offered to children or teenagers. They are also not a fit for people who are not interested in improving their lives or applying what they learn in practice."}</p></article>
+    </section>
+    <section className="service-note section-pad"><div><p className="eyebrow">{lt ? "Svarbu žinoti" : "Important"}</p><h2>{lt ? "Individualūs pokalbiai nėra psichoterapija, psichiatrinė ar medicininė pagalba." : "Individual sessions are not psychotherapy, psychiatric care or medical care."}</h2></div><p>{lt ? "Pokalbių metu nėra diagnozuojami ar gydomi psichikos sutrikimai. Jei jūsų situacijai reikia psichologo, psichoterapeuto, psichiatro ar kito licencijuoto specialisto pagalbos, būtina kreiptis į atitinkamą specialistą." : "No mental health condition is diagnosed or treated. If your situation requires a psychologist, psychotherapist, psychiatrist or another licensed professional, please seek the appropriate specialist support."}</p></section>
+    <section id="book-session" className="form-section section-pad"><div className="section-heading"><p className="eyebrow">{lt ? "Registracija" : "Book a session"}</p><h2>{lt ? "50 € / 60 min. · Privatus pokalbis vienas su vienu." : "€50 / 60 min. · Private one-to-one session."}</h2></div><ContactForm locale={locale} /></section>
   </>;
 }
 
@@ -124,7 +156,8 @@ export function SpeakingPage({ locale }: { locale: Locale }) {
   return <>
     <PageHero eyebrow={lt ? "Paskaitos" : "Speaking"} title={lt ? "Paskaitos, seminarai ir renginiai" : "Talks, Seminars & Events"} intro={lt ? "Gyvas, suprantamas ir mintį tęsti kviečiantis turinys organizacijoms, bendruomenėms ir renginių auditorijoms." : "Clear, engaging ideas that invite continued reflection for organisations, communities and event audiences."} image="/images/anna-outdoors.webp" />
     <section className="talk-topics section-pad"><div className="section-heading"><p className="eyebrow">{lt ? "Galimos temos" : "Suggested themes"}</p><h2>{lt ? "Pokalbiai apie tai, kas vyksta mūsų viduje." : "Conversations about what unfolds within us."}</h2></div><div>{speakingTopics[locale].map((topic, index) => <p key={topic}><span>{String(index + 1).padStart(2, "0")}</span>{topic}</p>)}</div></section>
-    <section className="speaking-philosophy"><div className="speaking-photo"><Image src={asset("/images/anna-editorial.webp")} alt="Anna Zieniute" fill sizes="(max-width: 800px) 100vw, 50vw" /></div><div><p className="eyebrow light">{lt ? "Kiekvienai auditorijai" : "For every audience"}</p><h2>{lt ? "Tema gali būti pritaikyta renginio tikslui, formatui ir žmonėms salėje." : "Each theme can be shaped around the event, its format and the people in the room."}</h2><p>{lt ? "Užklausoje papasakokite apie auditoriją ir norimą pokalbį. Turinys bei praktiniai klausimai derinami individualiai." : "Tell us about the audience and the conversation you hope to create. Content and practical details are agreed individually."}</p></div></section>
+    <section className="speaking-philosophy"><div className="speaking-photo"><Image src={asset("/images/anna-editorial.webp")} alt="Anna Zieniute" fill sizes="(max-width: 800px) 100vw, 50vw" /></div><div><p className="eyebrow light">{lt ? "Kiekvienai auditorijai" : "For every audience"}</p><h2>{lt ? "Paskaitos renginiams, komandoms, paskaitoms ir seminarams." : "Speaking for events, teams, lectures and seminars."}</h2><p>{lt ? "Tema pritaikoma auditorijai, renginio tikslui ir formatui. Kaina nustatoma individualiai pagal temą, trukmę, formatą ir renginio sąlygas. Turinys, praktinės sąlygos ir kaina suderinami prieš patvirtinant renginį." : "The subject is adapted to the audience, purpose and event format. Speaking fees are quoted individually based on the topic, duration, format and event conditions. Content, practical terms and the fee are agreed before the engagement is confirmed."}</p></div></section>
+    <section className="speaking-fee section-pad"><p className="eyebrow">{lt ? "Kaina" : "Speaking fee"}</p><h2>{lt ? "Derinama individualiai." : "Quoted individually."}</h2><p>{lt ? "Galutinė kaina priklauso nuo temos, trukmės, formato, auditorijos ir kitų renginio sąlygų." : "The final fee depends on the topic, duration, format, audience and other event requirements."}</p></section>
     <section className="form-section section-pad"><div className="section-heading"><p className="eyebrow">{lt ? "Renginio užklausa" : "Speaking enquiry"}</p><h2>{ui.invite[locale]}</h2></div><ContactForm locale={locale} kind="speaking" /></section>
   </>;
 }
