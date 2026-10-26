@@ -1,0 +1,45 @@
+name: Publish PawlogyDog to Netlify
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - public/pawlogy/**
+      - .github/workflows/pawlogy-netlify-production.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pawlogy-netlify-production
+  cancel-in-progress: true
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    env:
+      NETLIFY_SITE_ID: 242b5651-bb08-4389-9c0e-e64dc22fc989
+      NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check Netlify deployment permission
+        run: |
+          if [ -z "$NETLIFY_AUTH_TOKEN" ]; then
+            echo "::error::NETLIFY_AUTH_TOKEN is not configured in repository Actions secrets."
+            exit 1
+          fi
+          test -f public/pawlogy/index.html
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Publish latest Pawlogy website to branded Netlify domain
+        run: |
+          npx --yes netlify-cli@latest deploy --prod --no-build --dir=public/pawlogy --site="$NETLIFY_SITE_ID"
+      - name: Verify branded public URL
+        run: |
+          code="$(curl -sSL --retry 4 --retry-delay 3 --max-time 30 -o /tmp/site.html -w '%{http_code}' https://pawlogydog.netlify.app/)"
+          echo "HTTP_STATUS=$code"
+          test "$code" = "200"
+          grep -iq "PAWLOGY" /tmp/site.html
+          echo "Site published and responding: https://pawlogydog.netlify.app/" >> "$GITHUB_STEP_SUMMARY"
