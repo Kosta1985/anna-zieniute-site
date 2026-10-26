@@ -1,0 +1,50 @@
+name: Verify Pawlogy and create a branded share link
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/pawlogy-share-link.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify-and-share:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Confirm public Pawlogy website works
+        shell: bash
+        run: |
+          set -euo pipefail
+          url="https://kosta1985.github.io/anna-zieniute-site/pawlogy/"
+          status="$(curl -sSL --retry 3 --max-time 30 -o /tmp/pawlogy.html -w '%{http_code}' "$url")"
+          echo "PAWLOGY_HTTP_STATUS=$status"
+          if [ "$status" != "200" ]; then
+            echo "Public website not yet working; will not create a redirect."
+            exit 1
+          fi
+          grep -qi "PAWLOGY" /tmp/pawlogy.html
+          echo "PUBLIC_WEBSITE_CONFIRMED=$url"
+          printf 'Public website verified: %s\n' "$url" >> "$GITHUB_STEP_SUMMARY"
+      - name: Create and verify a brand-named short link
+        shell: bash
+        run: |
+          set -euo pipefail
+          dest="https://kosta1985.github.io/anna-zieniute-site/pawlogy/"
+          for alias in PawlogyDogAU PawlogyDogQLD PawlogyDogSchool; do
+            response="$(curl -sS --retry 2 --max-time 30 --get 'https://is.gd/create.php' --data-urlencode 'format=json' --data-urlencode "url=$dest" --data-urlencode "shorturl=$alias" || true)"
+            short="$(printf '%s' "$response" | python3 -c 'import sys,json; raw=sys.stdin.read(); d=json.loads(raw); print(d.get("shorturl",""))' 2>/dev/null || true)"
+            if [ -n "$short" ]; then
+              status="$(curl -sSL --max-time 30 -o /tmp/short-destination.html -w '%{http_code}' "$short" || true)"
+              if [ "$status" = "200" ] && grep -qi "PAWLOGY" /tmp/short-destination.html; then
+                echo "PAWLOGY_SHARE_LINK=$short"
+                echo "BRANDED_LINK_VERIFIED=$short"
+                printf 'Public Pawlogy share link: **%s**\n' "$short" >> "$GITHUB_STEP_SUMMARY"
+                exit 0
+              fi
+            fi
+          done
+          echo "Could not obtain a validated branded short URL."
+          exit 1
