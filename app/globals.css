@@ -188,3 +188,38 @@ h3 { font-size: clamp(1.7rem, 2.7vw, 2.8rem); line-height: 1; }
   html { scroll-behavior: auto; }
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
 }
+
+/* Fixed WhatsApp contact button. Keep it clear of the cookie-consent panel. */
+.whatsapp-float {
+  position: fixed;
+  right: max(1.1rem, env(safe-area-inset-right, 0px));
+  bottom: max(1.1rem, env(safe-area-inset-bottom, 0px));
+  z-index: 95;
+  display: grid;
+  width: 60px;
+  height: 60px;
+  place-items: center;
+  border: 2px solid rgba(255, 255, 255, .9);
+  border-radius: 50%;
+  background: #25d366;
+  color: #fff;
+  box-shadow: 0 8px 26px rgba(0, 0, 0, .22);
+  transition: background .2s ease, transform .2s ease, box-shadow .2s ease;
+}
+
+.whatsapp-float svg { display: block; width: 32px; height: 32px; }
+.whatsapp-float:hover { background: #1da851; transform: translateY(-3px); box-shadow: 0 12px 30px rgba(0, 0, 0, .24); }
+.whatsapp-float:focus-visible { outline: 3px solid var(--ink); outline-offset: 4px; }
+
+/* On first visit, make room for the fixed cookie choices without overlapping them. */
+.cookie-banner ~ .whatsapp-float { top: calc(var(--header) + 1rem); bottom: auto; }
+
+@media (max-width: 760px) {
+  .whatsapp-float {
+    right: 1rem;
+    bottom: max(1rem, env(safe-area-inset-bottom, 0px));
+    width: 56px;
+    height: 56px;
+  }
+  .whatsapp-float svg { width: 30px; height: 30px; }
+}

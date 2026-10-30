@@ -5,6 +5,7 @@ import { Analytics } from "@/components/Analytics";
 import { CookieConsent } from "@/components/CookieConsent";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
+import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { locales, type Locale } from "@/content/site";
 import "../globals.css";
 
@@ -32,6 +33,7 @@ export default async function LocaleLayout({ children, params }: Readonly<{ chil
         <main id="main">{children}</main>
         <Footer locale={locale} />
         <CookieConsent locale={locale} />
+        <WhatsAppButton locale={locale} />
         <Analytics />
       </body>
     </html>
