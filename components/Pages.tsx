@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Accordion } from "./Accordion";
-import { ContactForm } from "./ContactForm";
+import { WhatsAppContactLink } from "./WhatsAppButton";
 import { Gallery } from "./Gallery";
 import { articles, asset, faqs, href, speakingTopics, topics, ui, videos, type Locale, type PageKey } from "@/content/site";
 
@@ -156,7 +156,16 @@ export function IndividualPage({ locale }: { locale: Locale }) {
       <article><p className="eyebrow">{lt ? "Kam netinka" : "Who it is not for"}</p><h2>{lt ? "Tik suaugusiesiems (18+) ir tik aktyviai dalyvaujantiems." : "Adults (18+) only, and only for people willing to participate actively."}</h2><p>{lt ? "Pokalbiai neskirti vaikams ar paaugliams. Jie taip pat netinka žmonėms, kurie nėra suinteresuoti gerinti savo gyvenimo ir neketina praktiškai taikyti aptartų įrankių." : "Sessions are not offered to children or teenagers. They are also not a fit for people who are not interested in improving their lives or applying what they learn in practice."}</p></article>
     </section>
     <section className="service-note section-pad"><div><p className="eyebrow">{lt ? "Svarbu žinoti" : "Important"}</p><h2>{lt ? "Individualūs pokalbiai nėra psichoterapija, psichiatrinė ar medicininė pagalba." : "Individual sessions are not psychotherapy, psychiatric care or medical care."}</h2></div><p>{lt ? "Pokalbių metu nėra diagnozuojami ar gydomi psichikos sutrikimai. Jei jūsų situacijai reikia psichologo, psichoterapeuto, psichiatro ar kito licencijuoto specialisto pagalbos, būtina kreiptis į atitinkamą specialistą." : "No mental health condition is diagnosed or treated. If your situation requires a psychologist, psychotherapist, psychiatrist or another licensed professional, please seek the appropriate specialist support."}</p></section>
-    <section id="book-session" className="form-section section-pad"><div className="section-heading"><p className="eyebrow">{lt ? "Registracija" : "Book a session"}</p><h2>{lt ? "50 € / 60 min. · Privatus pokalbis vienas su vienu." : "€50 / 60 min. · Private one-to-one session."}</h2></div><ContactForm locale={locale} /></section>
+    <section id="book-session" className="form-section section-pad">
+      <div className="section-heading">
+        <p className="eyebrow">{lt ? "Registracija" : "Book a session"}</p>
+        <h2>{lt ? "50 € / 60 min. · Privatus pokalbis vienas su vienu." : "€50 / 60 min. · Private one-to-one session."}</h2>
+      </div>
+      <div className="contact-cta">
+        <p>{lt ? "Norėdami susitarti dėl individualaus pokalbio, parašykite Annai per WhatsApp." : "To arrange an individual conversation, message Anna directly on WhatsApp."}</p>
+        <WhatsAppContactLink locale={locale} />
+      </div>
+    </section>
   </>;
 }
 
@@ -167,7 +176,16 @@ export function SpeakingPage({ locale }: { locale: Locale }) {
     <section className="talk-topics section-pad"><div className="section-heading"><p className="eyebrow">{lt ? "Galimos temos" : "Suggested themes"}</p><h2>{lt ? "Pokalbiai apie tai, kas vyksta mūsų viduje." : "Conversations about what unfolds within us."}</h2></div><div>{speakingTopics[locale].map((topic, index) => <p key={topic}><span>{String(index + 1).padStart(2, "0")}</span>{topic}</p>)}</div></section>
     <section className="speaking-philosophy"><div className="speaking-photo"><Image src={asset("/images/anna-editorial.webp")} alt="Anna Zieniute" fill sizes="(max-width: 800px) 100vw, 50vw" /></div><div><p className="eyebrow light">{lt ? "Kiekvienai auditorijai" : "For every audience"}</p><h2>{lt ? "Paskaitos renginiams, komandoms, paskaitoms ir seminarams." : "Speaking for events, teams, lectures and seminars."}</h2><p>{lt ? "Tema pritaikoma auditorijai, renginio tikslui ir formatui. Kaina nustatoma individualiai pagal temą, trukmę, formatą ir renginio sąlygas. Turinys, praktinės sąlygos ir kaina suderinami prieš patvirtinant renginį." : "The subject is adapted to the audience, purpose and event format. Speaking fees are quoted individually based on the topic, duration, format and event conditions. Content, practical terms and the fee are agreed before the engagement is confirmed."}</p></div></section>
     <section className="speaking-fee section-pad"><p className="eyebrow">{lt ? "Kaina" : "Speaking fee"}</p><h2>{lt ? "Derinama individualiai." : "Quoted individually."}</h2><p>{lt ? "Galutinė kaina priklauso nuo temos, trukmės, formato, auditorijos ir kitų renginio sąlygų." : "The final fee depends on the topic, duration, format, audience and other event requirements."}</p></section>
-    <section className="form-section section-pad"><div className="section-heading"><p className="eyebrow">{lt ? "Renginio užklausa" : "Speaking enquiry"}</p><h2>{ui.invite[locale]}</h2></div><ContactForm locale={locale} kind="speaking" /></section>
+    <section className="form-section section-pad">
+      <div className="section-heading">
+        <p className="eyebrow">{lt ? "Renginio užklausa" : "Speaking enquiry"}</p>
+        <h2>{ui.invite[locale]}</h2>
+      </div>
+      <div className="contact-cta">
+        <p>{lt ? "Dėl renginio, paskaitos ar seminaro susisiekite su Anna per WhatsApp." : "For a talk, seminar or event, contact Anna on WhatsApp."}</p>
+        <WhatsAppContactLink locale={locale} />
+      </div>
+    </section>
   </>;
 }
 
@@ -198,7 +216,17 @@ export function InsightsPage({ locale }: { locale: Locale }) {
 export function ContactPage({ locale }: { locale: Locale }) {
   const lt = locale === "lt";
   return <>
-    <section className="contact-page section-pad"><div><p className="eyebrow">{lt ? "Kontaktai" : "Contact"}</p><h1>{lt ? "Pradėkime nuo pokalbio." : "Let’s start with a conversation."}</h1><p className="lead">{lt ? "Parašykite dėl individualaus pokalbio, paskaitos, seminaro ar bendradarbiavimo." : "Get in touch about an individual conversation, talk, seminar or collaboration."}</p></div><ContactForm locale={locale} /></section>
+    <section className="contact-page section-pad">
+      <div>
+        <p className="eyebrow">{lt ? "Kontaktai" : "Contact"}</p>
+        <h1>{lt ? "Pradėkime nuo pokalbio." : "Let’s start with a conversation."}</h1>
+        <p className="lead">{lt ? "Parašykite dėl individualaus pokalbio, paskaitos, seminaro ar bendradarbiavimo." : "Get in touch about an individual conversation, talk, seminar or collaboration."}</p>
+      </div>
+      <div className="contact-cta contact-cta-page">
+        <p>{lt ? "Susisiekite su Anna tiesiogiai per WhatsApp." : "Message Anna directly on WhatsApp."}</p>
+        <WhatsAppContactLink locale={locale} />
+      </div>
+    </section>
     <section className="faq-section section-pad"><div className="section-heading"><p className="eyebrow">{lt ? "Dažniausiai klausiama" : "Frequently asked"}</p><h2>{lt ? "Praktinė informacija" : "Practical information"}</h2></div><Accordion items={faqs[locale]} locale={locale} /></section>
   </>;
 }
@@ -209,10 +237,10 @@ export function PolicyPage({ locale, page }: { locale: Locale; page: "privacy" |
   return <article className="policy section-pad">
     <p className="eyebrow">{lt ? "Teisinė informacija" : "Legal information"}</p>
     <h1>{privacy ? (lt ? "Privatumo politika" : "Privacy Policy") : (lt ? "Slapukų politika" : "Cookie Policy")}</h1>
-    <p className="policy-updated">{lt ? "Atnaujinta: 2026 m. spalio 5 d." : "Last updated: 5 October 2026"}</p>
+    <p className="policy-updated">{lt ? "Atnaujinta: 2026 m. spalio 30 d." : "Last updated: 30 October 2026"}</p>
     {privacy ? <>
       <h2>{lt ? "Apie šią politiką" : "About this policy"}</h2><p>{lt ? "Ši politika paaiškina, kokius asmens duomenis svetainė gali rinkti ir kaip jie naudojami. Prieš viešą paleidimą duomenų valdytojo kontaktiniai duomenys turi būti papildyti patvirtinta informacija." : "This policy explains what personal data the website may collect and how it is used. Verified data-controller contact details must be added before public launch."}</p>
-      <h2>{lt ? "Kokius duomenis renkame" : "Data we collect"}</h2><p>{lt ? "Kai pateikiate kontaktinę ar renginio užklausos formą, galime gauti jūsų vardą, el. pašto adresą, telefono numerį, organizaciją, renginio informaciją ir žinutės turinį." : "When you submit a contact or speaking-enquiry form, we may receive your name, email address, phone number, organisation, event information and message."}</p>
+      <h2>{lt ? "Kokius duomenis renkame" : "Data we collect"}</h2><p>{lt ? "Susisiekus per WhatsApp, pokalbis vyksta išorinėje WhatsApp platformoje. Šiuo metu svetainėje nėra kontaktinės ar renginio užklausos formos." : "When you use a WhatsApp link, your conversation takes place on WhatsApp, an external messaging platform. This website does not currently provide a contact or speaking-enquiry form."}</p>
       <h2>{lt ? "Tikslas ir teisinis pagrindas" : "Purpose and legal basis"}</h2><p>{lt ? "Duomenys naudojami atsakyti į jūsų užklausą ir, kai reikia, imtis veiksmų prieš sudarant susitarimą. Pasirenkama analitika įjungiama tik gavus sutikimą." : "Data is used to respond to your enquiry and, where relevant, to take steps before entering an agreement. Optional analytics is enabled only with consent."}</p>
       <h2>{lt ? "Saugojimas ir jūsų teisės" : "Retention and your rights"}</h2><p>{lt ? "Duomenys saugomi tik tiek, kiek reikia užklausai administruoti ir teisėtiems apskaitos įsipareigojimams vykdyti. Pagal taikomus teisės aktus galite prašyti susipažinti su duomenimis, juos ištaisyti, ištrinti ar apriboti jų tvarkymą." : "Data is retained only as long as needed to manage the enquiry and meet legitimate record-keeping duties. Subject to applicable law, you may request access, correction, deletion or restriction of your data."}</p>
     </> : <>

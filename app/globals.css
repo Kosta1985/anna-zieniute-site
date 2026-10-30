@@ -223,3 +223,31 @@ h3 { font-size: clamp(1.7rem, 2.7vw, 2.8rem); line-height: 1; }
   }
   .whatsapp-float svg { width: 30px; height: 30px; }
 }
+
+/* Direct WhatsApp contact replaces the unconfigured enquiry forms. */
+.contact-cta {
+  display: flex;
+  max-width: 42rem;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.35rem;
+  margin-left: 25%;
+}
+.contact-cta p { max-width: 36rem; margin: 0; color: var(--muted); font-size: 1.05rem; }
+.contact-page .contact-cta { align-self: center; margin-left: 0; }
+.button.whatsapp-contact-link {
+  display: inline-flex;
+  align-items: center;
+  gap: .8rem;
+  background: #176843;
+  border-color: #176843;
+  color: #fff;
+  letter-spacing: .055em;
+}
+.button.whatsapp-contact-link svg { display: block; width: 23px; height: 23px; flex: none; }
+.button.whatsapp-contact-link:hover { background: #105337; border-color: #105337; }
+.button.whatsapp-contact-link:focus-visible { outline-color: #176843; }
+
+@media (max-width: 760px) {
+  .contact-cta { margin-left: 0; }
+}
