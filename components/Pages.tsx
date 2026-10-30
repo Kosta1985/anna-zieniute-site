@@ -117,7 +117,7 @@ export function IndividualPage({ locale }: { locale: Locale }) {
       <div><p className="eyebrow">{lt ? "Individualus pokalbis" : "Individual session"}</p><h2>{lt ? "50 € / 60 min." : "€50 / 60 min."}</h2></div>
       <div>
         <p>{lt ? "Privatus nuotolinis pokalbis vienas su vienu." : "Private one-to-one online session."}</p>
-        <Link className="button" href="#book-session">{lt ? "Registruotis" : "Book a session"}</Link>
+        <a className="button" href="https://wa.me/37067056560" target="_blank" rel="noopener noreferrer" aria-label={lt ? "Registruotis per WhatsApp" : "Book a session via WhatsApp"}>{lt ? "Registruotis" : "Book a session"}</a>
       </div>
     </section>
     <section className="process section-pad">{steps.map(([title, text], i) => <article key={title}><span>0{i + 1}</span><h2>{title}</h2><p>{text}</p></article>)}</section>
