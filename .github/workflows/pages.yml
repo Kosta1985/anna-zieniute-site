@@ -23,14 +23,33 @@ jobs:
         with:
           node-version: 22
       - run: npm install
-      - name: Build static website
+      - name: Build static website for annazieniute.com
         run: |
           rm -rf app/api
           npm run build
         env:
           GITHUB_PAGES: "true"
-          NEXT_PUBLIC_BASE_PATH: /anna-zieniute-site
-          NEXT_PUBLIC_SITE_URL: https://kosta1985.github.io/anna-zieniute-site
+          NEXT_PUBLIC_BASE_PATH: ""
+          NEXT_PUBLIC_SITE_URL: https://annazieniute.com
+      - name: Add homepage redirect and preserve Next.js assets
+        run: |
+          test -f out/lt/index.html
+          cat > out/index.html <<'HTML'
+          <!doctype html>
+          <html lang="lt">
+          <head>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <meta http-equiv="refresh" content="0; url=/lt/">
+            <link rel="canonical" href="https://annazieniute.com/lt/">
+            <title>Anna Zieniute</title>
+          </head>
+          <body>
+            <p><a href="/lt/">Open Anna Zieniute / Atidaryti svetainę</a></p>
+          </body>
+          </html>
+          HTML
+          touch out/.nojekyll
       - name: Save production static build
         uses: actions/upload-artifact@v4
         with:
